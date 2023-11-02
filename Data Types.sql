@@ -1,0 +1,121 @@
+-- data types
+
+-- bit : stores whole number, i.e. 0 or 1
+-- tinyint : can store whole numbers from 0 to 2^8 -1 (255)
+-- smallint : stores whole numbers from -2^15 to 2^15 -1
+-- int : stores whole numbers from -2^31 to 2^31-1
+-- bigint : stores whole numbers from -2^63 to 2^63-1
+-- decimal(t,r) : will allow numbers between -10^38 to 10^38 -1
+--				: t = number of digits, including before decimal point and digits after point
+--				: t = between 1 and 38, default = 18
+--				: r = digits that can be stored as decimal pt 
+-- smallmoney : used to store small currency data
+-- money : used to small larger currency data
+-- float(n) : used when more precision required, floating number, btwn -1.79*10^308 - 1.79*10^308
+-- real : used when floating precision number data required, btwn -3.4*10^8 - 3.4*10^8
+
+-- char(n) : stores texts/strings of fixed length, max 8000 characters
+-- varchar(n) : texts/strings of variable length, max 8000 characters
+--			  : when each record of particular field can vary in length
+-- text : used to store variable length data
+-- nchar(n) : used for fixed length unicode string btwn 0-4000 char
+-- nvarchar(n) : used for variable length unicode string btwn 0-4000 char
+-- image : used for variable length binary strings (preferably images)
+
+-- datetime : store date with time ranging from 1753-01-01 - 9999-12-31
+-- date : store date btwn 0001-01-01 and 9999-12-31
+--		: default format: YYYY-DD-MM
+-- time : stores a time with accuracy of 100 nanoseconds
+--		: default time format = hh:mm:ss[.nnnnnnn]
+-- timestamp : store unique timestamp (numeric) that reads internal clock
+--			 : automatically gets updated whenever row is created or updated
+
+-- uniqueidentifier : stores 16byte GUID (globally unique identifier)
+-- xml : stores xml type data
+
+-- create table without constraints
+-- CREATE TABLE tableName
+-- (
+-- column1 dataType1,
+-- column2 dataType2,
+-- column3 dataType3,
+-- ...
+-- ...
+-- )
+
+-- create table statement with constraints
+-- CREATE TABLE tableName
+-- (
+-- column1 dataType1 constraint1,
+-- column2 dataType2 constraint2,
+-- column3 dataType3 constraint3,
+-- ...
+-- ...
+-- )
+
+-- types of constraints:
+-- NOT NULL : imposes a rule that column/s will NOT contain NULL vals
+	-- CREATE TABLE tableName
+	-- (
+	-- column1 dataType1 NOT NULL,
+	-- column2 dataType2 NOT NULL,
+	-- column3 dataType3 NOT NULL,
+	-- ...
+	-- ...
+	-- )
+-- UNIQUE : imposes a rule that each record of a column on which UNIQUE constraint is applied 
+--			will NOT contain unique values
+-- CREATE TABLE tableName
+-- (
+-- column1 dataType1 UNIQUE,
+-- column2 dataType2 UNIQUE,
+-- ...
+-- ...
+-- )
+-- CHECK : impose a CHECK on a table to contain only those values which pass condition test
+	-- CREATE TABLE tableName
+	-- (
+	-- column1 dataType1 CHECK(constraint1),
+	-- column2 dataType2 CHECK(constraint2),
+	-- column3 dataType3 CHECK(constraint3),
+	-- ...
+	-- ...
+	-- )
+-- DEFAULT : adds default value for a column when no value is inserted for that columns
+	-- CREATE TABLE tableName
+	-- (
+	-- column1 dataType1 DEFAULT Value1,
+	-- column2 dataType2 DEFAULT Value2,
+	-- column3 dataType3 DEFAULT Value3,
+	-- ...
+	-- )
+-- relationship constraints
+-- PRIMARY KEY : to uniquely identify each record in a table in order to main Entity Relationship
+	-- CREATE TABLE tableName
+	-- (
+	-- column1 dataType1 PRIMARY KEY,
+	-- column2 dataType2 CHECK(constraint2),
+	-- ...
+	-- ...
+-- FOREIGN KEY : links a child table with its parent table
+-- FOREIGN KEY (col1, col2, ...) REFERENCES parentTable (col1, col2,...)
+-- ON DELETE NO ACTION / CASCADE / SET NULL / SET DEFAULT
+-- ON UPDATE NO ACTION / CASCADE / SET NULL / SET DEFAULT
+
+-- when a record is deleted / updated from parent table..
+
+-- NO ACTION:  then throw an error and rollback the action on the parent table
+-- CASCADE: then the related record in the child table is automatically deleted
+-- SET NULL: then the related record in the child table is set to NULL
+-- SET DEFAULT: then the related record in the child table is set to DEFAULT
+
+-- if you wish to insert a record in the child table, then the record must exist in the parent table
+-- if you wish to delete a record from the parent table which has a linked record in the child table, 
+-- then you have to remove tje linked record from the child table first
+-- A NULL is allowed in foreign key
+
+-- Unique Index : impose that no duplicate value is allowed for a column
+-- CREATE UNIQUE INDEX indexName ON tableName (col1, col2,...)
+
+-- INDEX 
+-- CREATE INDEX indexName ON tableName (col1, col2,...)
